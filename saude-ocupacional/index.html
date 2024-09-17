@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.js"></script>
+    
+    <title>Agendamento - Saúde Ocupacional</title>
+</head>
+<body>
+    <div class="container-box">
+        <div class="login">
+            <a class="botao-login" href="/sistema-agendamento/visita-tecnica/admin.php">Login</a>
+        </div>
+        <center> <img style="width: 140px;" src="logo.png"/> </center>
+        <center><h3>Agendamento - Saúde Ocupacional</h3></center>
+        <form action="index.php" method="POST">
+            <label for="nome">Nome completo*:</label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            
+            <label for="cnpj_cpf">CPF*:</label>
+            <input type="text" id="cnpj_cpf" name="cnpj_cpf" required><br><br>
+            
+            <label for="telefone">Telefone*:</label>
+            <input type="text" id="telefone" name="telefone" required><br><br>
+            
+            <label for="nome_contato">Nome do Contato (Opcional):</label>
+            <input type="text" id="nome_contato" name="nome_contato"><br><br>
+            
+            <label for="email">E-mail*:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="data">Data*:</label>
+            <input type="date" id="data" name="data" required><br><br>
+
+            <!-- Campo para horário -->
+            <label for="horario">Horário*:</label>
+            <input type="text" id="horario" name="horario" required><br><br>
+            
+            <input type="submit" value="Agendar">
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Máscara para o campo CNPJ
+            $('#cnpj_cpf').mask('000.000.000-00');
+
+            // Inicializa o TimePicker com formato de relógio
+            $('#horario').timepicker({
+                'timeFormat': 'H:i',
+                'minTime': '10:00',
+                'maxTime': '17:00',
+                'disableTimeRanges': [['11:00', '16:00'], ['17:00', '23:59']],
+                'interval': 30, // Intervalo de 30 minutos
+                'forceRoundTime': true // Garante que o tempo selecionado seja arredondado para o intervalo mais próximo
+            });
+        });
+
+        // Inicializa o Flatpickr para o campo de data
+        flatpickr("#data", {
+            dateFormat: "Y-m-d",
+            disable: [
+                function(date) {
+                    // Desabilita sábados (6) e domingos (0)
+                    return (date.getDay() === 0 || date.getDay() === 6);
+                }
+            ],
+            locale: {
+                firstDayOfWeek: 1 // Começar a semana na segunda-feira
+            }
+        });
+
+        // Validação de feriados e datas
+        document.addEventListener('DOMContentLoaded', function () {
+            const dateInput = document.getElementById('data');
+      
+            // Lista de feriados no formato 'MM-DD'
+            const holidays = ['01-01', '04-21', '05-01', '09-07', '10-12', '11-02', '11-15', '12-25'];
+      
+            dateInput.addEventListener('input', function () {
+                const selectedDate = new Date(this.value);
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0); // Zerar horas para comparar apenas as datas
+                
+                // Verifica se é data passada
+                if (selectedDate < currentDate) {
+                    alert('Não é possível selecionar uma data passada.');
+                    this.value = ''; // Limpa o campo de data
+                    return;
+                }
+
+                // Verifica se é feriado
+                const formattedDate = selectedDate.toISOString().slice(5, 10); // Extrai 'MM-DD' da data
+                if (holidays.includes(formattedDate)) {
+                    alert('Não é possível selecionar um feriado.');
+                    this.value = ''; // Limpa o campo de data
+                    return;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

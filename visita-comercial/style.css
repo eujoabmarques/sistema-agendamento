@@ -1,0 +1,121 @@
+/* style.css */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #11bc57;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container-box{
+  margin: 20px;
+  width: 40%;
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+background: #fff;
+border-radius: 20px;
+}
+.login{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+.botao-login{
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background: #c5c5c5;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 0.5s;
+}
+.botao-login:hover{
+  background: #24b524;
+}
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  width: 350px; /* Aumenta um pouco a largura para mais espaço */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transições suaves */
+}
+
+.container:hover {
+  transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+}
+
+h1, h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+input, select, button {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Adiciona transições suaves */
+}
+
+input:focus, select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Efeito de elevação ao passar o mouse */
+}
+
+button:active {
+  background-color: #004085;
+}
+
+#schedule {
+  margin-top: 30px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f1f3f5;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-align: center;
+  transition: background-color 0.3s ease; /* Adiciona transições suaves */
+}
+
+li:hover {
+  background-color: #e2e6ea;
+}
